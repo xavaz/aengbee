@@ -19,6 +19,7 @@ package com.aengbee.android.tvleanback.ui;
 import static android.support.v4.media.session.MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS;
 import static android.support.v4.media.session.MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS;
 
+import com.aengbee.android.tvleanback.utils.CardListRow;
 import com.google.android.exoplayer.ExoPlayer;
 import com.google.android.exoplayer.util.Util;
 
@@ -69,7 +70,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.aengbee.android.tvleanback.R;
-import com.aengbee.android.tvleanback.Utils;
+import com.aengbee.android.tvleanback.utils.Utils;
 import com.aengbee.android.tvleanback.data.VideoContract;
 import com.aengbee.android.tvleanback.model.Video;
 import com.aengbee.android.tvleanback.model.VideoCursorMapper;
@@ -196,6 +197,7 @@ public class PlaybackOverlayFragment
         ClassPresenterSelector ps = new ClassPresenterSelector();
         ps.addClassPresenter(PlaybackControlsRow.class, controlsRowPresenter);
         ps.addClassPresenter(ListRow.class, new ListRowPresenter());
+
         mRowsAdapter = new ArrayObjectAdapter(ps);
         mRowsAdapter.add(controlsRow);
         addOtherRows();
@@ -490,7 +492,10 @@ public class PlaybackOverlayFragment
 
         HeaderItem header = new HeaderItem(getString(R.string.related_movies));
         mRowsAdapter.add(new ListRow(header, mVideoCursorAdapter));
+
     }
+
+
 
     private VideoPlayer.RendererBuilder getRendererBuilder() {
         String userAgent = Util.getUserAgent(getActivity(), "ExoVideoPlayer");

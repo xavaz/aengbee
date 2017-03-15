@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.aengbee.android.tvleanback;
+package com.aengbee.android.tvleanback.utils;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Point;
 import android.media.MediaMetadataRetriever;
+import android.net.Uri;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -27,6 +29,8 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.VideoView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 
 /**
@@ -95,5 +99,30 @@ public class Utils {
             mmr.setDataSource(videoUrl);
         }
         return Long.parseLong(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+    }
+
+    /**
+     * Will read the content from a given {@link InputStream} and return it as a {@link String}.
+     *
+     * @param inputStream The {@link InputStream} which should be read.
+     * @return Returns <code>null</code> if the the {@link InputStream} could not be read. Else
+     * returns the content of the {@link InputStream} as {@link String}.
+     */
+    public static String inputStreamToString(InputStream inputStream) {
+        try {
+            byte[] bytes = new byte[inputStream.available()];
+            inputStream.read(bytes, 0, bytes.length);
+            String json = new String(bytes);
+            return json;
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public static Uri getResourceUri(Context context, int resID) {
+        return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                context.getResources().getResourcePackageName(resID) + '/' +
+                context.getResources().getResourceTypeName(resID) + '/' +
+                context.getResources().getResourceEntryName(resID));
     }
 }
