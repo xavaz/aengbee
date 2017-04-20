@@ -7,6 +7,9 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:colorPrimary">@color/fastlane_background</item>
     </style>
+    <style name="Theme.Leanback.Browse.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
 
     <style name="AppTheme" parent="@style/Theme.Leanback">
     </style>
@@ -198,19 +201,21 @@
     <style name="IconCardImageStyle" parent="Widget.Leanback.ImageCardView.ImageStyle">
         <item name="android:layout_width">26dp</item>
         <item name="android:layout_height">26dp</item>
-        <item name="android:padding">2dp</item>
+        <item name="android:padding">0dp</item>
+
     </style>
 
     <style name="IconCardTitleStyle" parent="Widget.Leanback.ImageCardView.TitleStyle">
-        <item name="android:maxLines">2</item>
-        <item name="android:minLines">2</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:minLines">1</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="IconCardInfoAreaStyle" parent="Widget.Leanback.ImageCardView.InfoAreaStyle">
-        <item name="android:layout_width">26dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
         <item name="android:background">@null</item>
-        <item name="layout_viewType">main</item>
+        <item name="layout_viewType">info</item>
     </style>
 
     <!-- Theme corresponding to the IconCardStyle -->

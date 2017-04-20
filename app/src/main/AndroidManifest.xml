@@ -15,7 +15,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.aengbee.android.tvleanback">
+    package="com.aengbee.android.leanback">
 
     <permission
         android:name="${applicationId}.ACCESS_VIDEO_DATA"
@@ -43,17 +43,17 @@
     <application
         android:allowBackup="false"
         android:banner="@drawable/videos_by_google_banner"
-        android:icon="@drawable/app_icon_quantum"
+        android:icon="@drawable/ic_mobile"
         android:label="@string/app_name"
         android:logo="@drawable/videos_by_google_banner"
         android:theme="@style/Theme.Leanback">
         <activity
-            android:name="com.aengbee.android.tvleanback.ui.MainActivity"
-            android:icon="@drawable/videos_by_google_banner"
+            android:name="com.aengbee.android.leanback.ui.MainActivity"
+            android:icon="@drawable/ic_mobile"
             android:label="@string/app_name"
             android:logo="@drawable/videos_by_google_banner"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.Leanback.Browse">
+            android:theme="@style/Theme.Leanback.Browse.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -61,7 +61,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.aengbee.android.tvleanback.mobile.MobileWelcomeActivity">
+        <activity android:name="com.aengbee.android.leanback.mobile.MobileWelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -72,7 +72,7 @@
         <meta-data android:name="android.app.default_searchable"
             android:value=".ui.VideoDetailsActivity" />
         <activity
-            android:name="com.aengbee.android.tvleanback.ui.VideoDetailsActivity"
+            android:name="com.aengbee.android.leanback.ui.VideoDetailsActivity"
             android:exported="true"
             android:theme="@style/Theme.Leanback.Details">
 
@@ -88,24 +88,25 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="com.aengbee.android.tvleanback.ui.PlaybackOverlayActivity"
+            android:name="com.aengbee.android.leanback.ui.PlaybackOverlayActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
             android:launchMode="singleTask"
             android:resizeableActivity="true"
             android:supportsPictureInPicture="true" />
+
         <activity
-            android:name="com.aengbee.android.tvleanback.ui.VerticalGridActivity"
+            android:name="com.aengbee.android.leanback.ui.VerticalGridActivity"
             android:exported="true"
-            android:parentActivityName="com.aengbee.android.tvleanback.ui.MainActivity"
+            android:parentActivityName="com.aengbee.android.leanback.ui.MainActivity"
             android:theme="@style/Theme.Leanback.VerticalGrid" />
-        <activity android:name="com.aengbee.android.tvleanback.ui.SearchActivity" />
+        <activity android:name="com.aengbee.android.leanback.ui.SearchActivity" />
         <activity
-            android:name="com.aengbee.android.tvleanback.ui.GuidedStepActivity"
+            android:name="com.aengbee.android.leanback.ui.GuidedStepActivity"
             android:theme="@style/Theme.Example.Leanback.GuidedStep" />
 
         <!-- Provides search suggestions for keywords against video metadata. -->
         <provider
-            android:name="com.aengbee.android.tvleanback.data.VideoProvider"
+            android:name="com.aengbee.android.leanback.data.VideoProvider"
             android:authorities="${packageName}"
             android:exported="true">
             <path-permission
@@ -114,7 +115,7 @@
         </provider>
 
         <receiver
-            android:name="com.aengbee.android.tvleanback.recommendation.RecommendationReceiver"
+            android:name="com.aengbee.android.leanback.recommendation.RecommendationReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -123,23 +124,78 @@
         </receiver>
 
         <service
-            android:name="com.aengbee.android.tvleanback.data.FetchVideoService"
+            android:name="com.aengbee.android.leanback.data.FetchVideoService"
             android:exported="false" />
         <service
-            android:name="com.aengbee.android.tvleanback.recommendation.UpdateRecommendationsService"
+            android:name="com.aengbee.android.leanback.recommendation.UpdateRecommendationsService"
             android:enabled="true" />
 
-        <activity android:name="com.aengbee.android.tvleanback.ui.OnboardingActivity"
+        <activity android:name="com.aengbee.android.leanback.ui.OnboardingActivity"
             android:enabled="true"
             android:exported="true"
             android:theme="@style/Theme.Leanback.Onboarding" />
-        <activity android:name="com.aengbee.android.tvleanback.ui.SettingsActivity"
+        <activity android:name="com.aengbee.android.leanback.ui.SettingsActivity"
             android:exported="true"
             android:theme="@style/LeanbackPreferences"
             />
         <activity
-            android:name="com.aengbee.android.tvleanback.ui.AuthenticationActivity"
+            android:name="com.aengbee.android.leanback.ui.AuthenticationActivity"
             android:theme="@style/Theme.Example.Leanback.GuidedStep" />
+
+
+
+        <activity
+            android:name="com.aengbee.android.leanback.showcase.ShowcaseActivity"
+            android:exported="true"
+            />
+
+        <activity
+            android:name="com.aengbee.android.leanback.showcase.page.PageAndListRowActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Example.Leanback.CustomTitle"/>
+        <activity
+            android:name="com.aengbee.android.leanback.showcase.wizard.WizardExampleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Example.LeanbackWizard"/>
+        <activity
+            android:name="com.aengbee.android.leanback.showcase.settings.SettingsExampleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Example.LeanbackPreferences"/>
+        <activity
+            android:name="com.aengbee.android.leanback.showcase.dialog.DialogExampleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Example.LeanbackDialog"/>
+        <activity
+            android:name="com.aengbee.android.leanback.showcase.details.DetailViewExampleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Example.LeanbackDetails"/>
+        <activity
+            android:name="com.aengbee.android.leanback.showcase.cards.CardExampleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Example.LeanbackBrowse"/>
+        <activity
+            android:name="com.aengbee.android.leanback.showcase.grid.GridExampleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Example.LeanbackVerticalGrid"/>
+        <activity
+            android:name="com.aengbee.android.leanback.showcase.grid.VideoGridExampleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Example.LeanbackVerticalGrid"/>
+        <activity
+            android:name="com.aengbee.android.leanback.showcase.media.VideoExampleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Example.Leanback"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            />
+        <activity
+            android:name="com.aengbee.android.leanback.showcase.media.MusicExampleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Example.LeanbackMusic"/>
+
+        <service android:exported="false" android:name="com.aengbee.android.leanback.showcase.media.MusicPlaybackService"/>
     </application>
 
 </manifest>
