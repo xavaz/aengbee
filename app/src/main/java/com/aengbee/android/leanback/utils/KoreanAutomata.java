@@ -43,15 +43,17 @@ public class KoreanAutomata {
     public int GetState()
     {
         return mState;
-    };
+    }
+
     public String GetCompositionString()
     {
         return mCompositionString;
-    };
+    }
+
     public String GetCompleteString()
     {
         return mCompleteString;
-    };
+    }
 
     public void ToggleMode()
     {
@@ -65,31 +67,23 @@ public class KoreanAutomata {
     {
         if ((code >= HANGUL_START) && (code <= HANGUL_END))
             return true;
-        if ((code >= HANGUL_JAMO_START) && (code <= HANGUL_JAMO_END))
-            return true;
-        return false;
+        return (code >= HANGUL_JAMO_START) && (code <= HANGUL_JAMO_END);
     }
 
     public boolean IsJAMO(char code)
     {
-        if ((code >= HANGUL_JAMO_START) && (code <= HANGUL_JAMO_END))
-            return true;
-        return false;
-    };
+        return (code >= HANGUL_JAMO_START) && (code <= HANGUL_JAMO_END);
+    }
 
     public boolean IsConsonant(char code)
     {
-        if ((code >= HANGUL_JAMO_START) && (code < HANGUL_MO_START))
-            return true;
-        return false;
-    };
+        return (code >= HANGUL_JAMO_START) && (code < HANGUL_MO_START);
+    }
 
     public boolean IsVowel(char code)
     {
-        if ((code >= HANGUL_MO_START) && (code <= HANGUL_JAMO_END))
-            return true;
-        return false;
-    };
+        return (code >= HANGUL_MO_START) && (code <= HANGUL_JAMO_END);
+    }
 
     /** not used.
      public boolean IsLastConsonanted(char code)
@@ -404,9 +398,9 @@ public class KoreanAutomata {
     public int GetAlphabetIndex(char code)
     {
         if (code >= 'a' && code <= 'z')
-            return (int) (code - 'a');
+            return code - 'a';
         if (code >= 'A' && code <= 'Z')
-            return (int) (code - 'A');
+            return code - 'A';
 
         return -1;
     }
@@ -680,7 +674,7 @@ public class KoreanAutomata {
             }
         }
         return result;
-    };
+    }
 
     private int DoState00(char code) // current composition string: NULL
     {
@@ -697,7 +691,7 @@ public class KoreanAutomata {
         mCompositionString = "";
         mCompositionString += code;
         return ACTION_UPDATE_COMPOSITIONSTR | ACTION_APPEND;
-    };
+    }
 
     private int DoState01(char code) // current composition string: single consonant only
     {
@@ -741,7 +735,7 @@ public class KoreanAutomata {
             ret = ACTION_UPDATE_COMPOSITIONSTR;
         }
         return ret;
-    };
+    }
 
     private int DoState02(char code) // current composition string: single consonant + single vowel
     {
@@ -799,7 +793,7 @@ public class KoreanAutomata {
             }
         }
         return ret;
-    };
+    }
 
     private int DoState03(char code) // current composition string: single consonant + single vowel + single consonant
     {
@@ -863,7 +857,7 @@ public class KoreanAutomata {
             ret = ACTION_UPDATE_COMPLETESTR | ACTION_UPDATE_COMPOSITIONSTR;
         }
         return ret;
-    };
+    }
 
     private int DoState04(char code) // current composition string: single vowel
     {
@@ -904,7 +898,7 @@ public class KoreanAutomata {
             }
         }
         return ret;
-    };
+    }
 
     private int DoState05(char code) // current composition string: a combined vowel
     {
@@ -933,7 +927,7 @@ public class KoreanAutomata {
             ret = ACTION_UPDATE_COMPLETESTR | ACTION_UPDATE_COMPOSITIONSTR;
         }
         return ret;
-    };
+    }
 
     private int DoState10(char code) // current composition string: a combined consonant
     {
@@ -968,7 +962,7 @@ public class KoreanAutomata {
             ret = ACTION_UPDATE_COMPLETESTR | ACTION_UPDATE_COMPOSITIONSTR;
         }
         return ret;
-    };
+    }
 
     private int DoState11(char code) // current composition string: single consonant + single vowel + a combined consonant
     {
@@ -1006,7 +1000,7 @@ public class KoreanAutomata {
             ret = ACTION_UPDATE_COMPLETESTR | ACTION_UPDATE_COMPOSITIONSTR;
         }
         return ret;
-    };
+    }
 
     private int DoState20(char code) // current composition string: single consonant + a combined vowel
     {
@@ -1049,7 +1043,7 @@ public class KoreanAutomata {
             ret = ACTION_UPDATE_COMPLETESTR | ACTION_UPDATE_COMPOSITIONSTR;
         }
         return ret;
-    };
+    }
 
     private int DoState21(char code) // current composition string: single consonant + a combined vowel + single consonant
     {
@@ -1112,7 +1106,7 @@ public class KoreanAutomata {
             ret = ACTION_UPDATE_COMPLETESTR | ACTION_UPDATE_COMPOSITIONSTR;
         }
         return ret;
-    };
+    }
 
     private int DoState22(char code) // current composition string: single consonant + a combined vowel + a combined consonant
     {
@@ -1151,5 +1145,5 @@ public class KoreanAutomata {
             ret = ACTION_UPDATE_COMPLETESTR | ACTION_UPDATE_COMPOSITIONSTR;
         }
         return ret;
-    };
+    }
 }

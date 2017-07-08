@@ -19,6 +19,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.Rating;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -53,7 +54,7 @@ public class VideoDbBuilder {
     public static final String TAG_TITLE = "title";
     public static final String TAG_RATING_SCORE = "rating";
     public static final String TAG_PLAYABLE = "playable";
-
+    public static final String TAG_DURATION = "duration";
 
     private static final String TAG = "VideoDbBuilder";
 
@@ -105,7 +106,7 @@ public class VideoDbBuilder {
             JSONObject videoData = fetchJSON(url);
             return buildMedia(videoData,serverId);
         } else {
-            JSONObject videoData = fetchJSONfromResource(url);
+            JSONObject videoData = fetchJSONfromResource(R.raw.sample);
             return buildMedia(videoData,serverId);
         }
     }
@@ -119,12 +120,12 @@ public class VideoDbBuilder {
 
         JSONArray categoryArray = jsonObj.getJSONArray(TAG_GOOGLE_VIDEOS);
         List<ContentValues> videosToInsert = new ArrayList<>();
-        /*
+
         if(categoryArray.getJSONObject(0).getString("category").equals("KY")){
             JSONObject add = new JSONObject("{\"description\":\"아이템 추가\",\"sources\":[\"http://fytoz.asuscomm.com/4TB/TJ/48/48288.html\"],\"card\":\"http://fytoz.asuscomm.com/android-tv/album/000/000/add.jpg\",\"background\":\"http://fytoz.asuscomm.com/android-tv/artist/000/000/0.jpg\",\"title\":\"검색 기능\",\"studio\":\"KY\"}");
-            categoryArray.getJSONObject(0).getJSONArray("videos").put(add);
+            categoryArray.getJSONObject(0).getJSONArray("videos").put(categoryArray.getJSONObject(0).length(), add);
         }
-        */
+
         for (int i = 0; i < categoryArray.length(); i++) {
             JSONArray videoArray;
 
@@ -147,10 +148,7 @@ public class VideoDbBuilder {
                 String bgImageUrl = video.optString(TAG_BACKGROUND);
                 String cardImageUrl = video.optString(TAG_CARD_THUMB);
                 String studio = video.optString(TAG_STUDIO);
-
-                float rating = Float.parseFloat(video.optString(TAG_RATING_SCORE,"0"));
-                if(rating!=0)
-                    rating = rating/2f;
+                String duration = video.optString(TAG_DURATION);
                 String content_type = "video/mp4";
                 if(videoUrl.toLowerCase().endsWith("html"))
                     content_type="text/html";
@@ -165,9 +163,9 @@ public class VideoDbBuilder {
                 videoValues.put(VideoContract.VideoEntry.COLUMN_BG_IMAGE_URL, bgImageUrl);
                 videoValues.put(VideoContract.VideoEntry.COLUMN_STUDIO, studio);
                 videoValues.put(VideoContract.VideoEntry.COLUMN_IS_LIVE, serverId); //json_url_id
-                videoValues.put(VideoContract.VideoEntry.COLUMN_RATING_SCORE, rating);
+                videoValues.put(VideoContract.VideoEntry.COLUMN_RATING_SCORE, playable); //playable 1 or not 0
                 videoValues.put(VideoContract.VideoEntry.COLUMN_CONTENT_TYPE, content_type);
-                videoValues.put(VideoContract.VideoEntry.COLUMN_DURATION, playable); //playable 1 or not 0
+                videoValues.put(VideoContract.VideoEntry.COLUMN_DURATION, duration); //ex) 232 (seconds)
 
                 // Fixed defaults.
                 videoValues.put(VideoContract.VideoEntry.COLUMN_AUDIO_CHANNEL_CONFIG, "2.0");
@@ -227,10 +225,37 @@ public class VideoDbBuilder {
         }
     }
 
+    private JSONObject fetchJSONfromResource(int resource) throws JSONException, IOException{
+        BufferedReader reader = null;
+        try {
+            InputStream is = mContext.getResources().openRawResource(resource);
+            reader = new BufferedReader(new InputStreamReader(is,
+                    "utf-8"));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }
+            String json = sb.toString();
+            return new JSONObject(json);
+
+        } finally {
+            if (null != reader) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    Log.e(TAG, "JSON feed closed", e);
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
     private JSONObject fetchJSONfromResource(String resource) throws JSONException, IOException{
         BufferedReader reader = null;
         try {
-            InputStream is = mContext.getAssets().open(resource);
+            InputStream is = mContext.getContentResolver().openInputStream(Uri.parse(resource));
             reader = new BufferedReader(new InputStreamReader(is,
                     "utf-8"));
             StringBuilder sb = new StringBuilder();

@@ -36,23 +36,14 @@
     <dimen name="movie_image_card_width">120dp</dimen>
     <dimen name="movie_image_card_height">172dp</dimen>
 
-    <dimen name="icon_image_card_width">24dp</dimen>
-    <dimen name="icon_image_card_height">24dp</dimen>
-
     <dimen name="big_square_image_card_width">144dp</dimen>
     <dimen name="big_square_image_card_height">144dp</dimen>
 
     <dimen name="square_image_card_width">128dp</dimen>
     <dimen name="square_image_card_height">128dp</dimen>
 
-    <dimen name="small_square_image_card_width">96dp</dimen>
-    <dimen name="small_square_image_card_height">96dp</dimen>
-
     <dimen name="sidetext_image_card_width">144dp</dimen>
     <dimen name="sidetext_image_card_height">144dp</dimen>
-
-    <dimen name="wide_short_image_card_width">224dp</dimen>
-    <dimen name="wide_short_image_card_height">109dp</dimen>
 
     <dimen name="character_image_card_width">120dp</dimen>
     <dimen name="character_image_card_height">120dp</dimen>

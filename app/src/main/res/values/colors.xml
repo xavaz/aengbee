@@ -17,33 +17,25 @@
 <resources>
     <color name="background_gradient_start">#000000</color>
     <color name="background_gradient_end">#DDDDDD</color>
-    <color name="fastlane_background">#546E7A</color>
-    <color name="search_opaque">#D4AF37</color>
-    <color name="selected_background">#D4AF37</color>
 
-    <color name="default_background">#546E7A</color>
+    <color name="fastlane_background">#607d8b</color>
+    <color name="search_opaque">#ffc107</color>
+
+    <color name="default_background">#004ba0</color>
+    <color name="selected_background">#1976d2</color>
+
     <color name="icon_background">#4A4F51</color>
     <color name="icon_alt_background">#2A2F51</color>
 
-
-    <color name="fastlane_teal_background">#00796B</color>
-
     <color name="search_color">#FFEB3B</color>
-    <color name="search_bright_color">#FFEB3B</color>
+    <color name="search_bright_color">#fff350</color>
+
     <color name="search_icon_color">#222222</color>
     <color name="accent">#80D3FB</color>
     <color name="settings_background">#00695C</color>
 
-
     <color name="default_card_background_color">#263238</color>
     <color name="default_card_footer_background_color">#37474F</color>
-    <color name="selected_card_footer_background_color">#F0F</color>
-
-    <color name="lb_default_brand_color">#FF455A64</color>
-    <color name="card_primary_text">#EEEEEE</color>
-    <color name="card_secondary_text">#99EEEEEE</color>
-
-    <color name="loading_error_card_background">#86c739</color>
 
     <color name="card_examples_background">#222222</color>
 

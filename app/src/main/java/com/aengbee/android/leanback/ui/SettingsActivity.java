@@ -27,4 +27,6 @@ public class SettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_fragment);
     }
+
+
 }

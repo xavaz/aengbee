@@ -370,7 +370,7 @@ public class PlaybackOverlayCustomFragment
                                     " lower ( trim ( " + VideoContract.VideoEntry.COLUMN_DESC + " , ? ) ) LIKE ? OR " +
                                     " lower ( trim ( " + VideoContract.VideoEntry.COLUMN_NAME + " , ? ) ) LIKE ? OR " +
                                     " lower ( trim ( " + VideoContract.VideoEntry.COLUMN_DESC + " , ? ) ) LIKE ? ) AND " +
-                                    VideoContract.VideoEntry.COLUMN_DURATION + " == ? AND " +
+                                    VideoContract.VideoEntry.COLUMN_RATING_SCORE + " == ? AND " +
                                     VideoContract.VideoEntry.COLUMN_CATEGORY + " == ? ",
                             // Selection clause is category.
                             new String[]{SPECIAL_CHARACTERS, "%" + query + "%", SPECIAL_CHARACTERS, "%" + query + "%", SPECIAL_CHARACTERS, queryNormalizer(query), SPECIAL_CHARACTERS, queryNormalizer(query), "1", "KY"},
@@ -385,7 +385,7 @@ public class PlaybackOverlayCustomFragment
                             //VideoContract.VideoEntry.COLUMN_CATEGORY + " = ? AND " +
                             " ( lower ( trim ( " + VideoContract.VideoEntry.COLUMN_NAME + " , ? ) ) LIKE ? OR " +
                                     " lower ( trim ( " + VideoContract.VideoEntry.COLUMN_DESC + " , ? ) ) LIKE ? ) AND " +
-                                    VideoContract.VideoEntry.COLUMN_DURATION + " == ? AND " +
+                                    VideoContract.VideoEntry.COLUMN_RATING_SCORE + " == ? AND " +
                                     VideoContract.VideoEntry.COLUMN_CATEGORY + " == ? ",
                             // Selection clause is category.
                             new String[]{SPECIAL_CHARACTERS, "%" + query + "%", SPECIAL_CHARACTERS, "%" + query + "%", "1", "KY"},
@@ -433,7 +433,7 @@ public class PlaybackOverlayCustomFragment
                                     " lower ( trim ( " + VideoContract.VideoEntry.COLUMN_DESC + " , ? ) ) LIKE ? OR " +
                                     " lower ( trim ( " + VideoContract.VideoEntry.COLUMN_NAME + " , ? ) ) LIKE ? OR " +
                                     " lower ( trim ( " + VideoContract.VideoEntry.COLUMN_DESC + " , ? ) ) LIKE ? ) AND " +
-                                    VideoContract.VideoEntry.COLUMN_DURATION + " == ? AND " +
+                                    VideoContract.VideoEntry.COLUMN_RATING_SCORE + " == ? AND " +
                                     VideoContract.VideoEntry.COLUMN_CATEGORY + " == ? ",
                             // Selection clause is category.
                             new String[]{SPECIAL_CHARACTERS, "%" + query + "%", SPECIAL_CHARACTERS, "%" + query + "%", SPECIAL_CHARACTERS, queryNormalizer(query), SPECIAL_CHARACTERS, queryNormalizer(query), "1", "KY"},
@@ -448,7 +448,7 @@ public class PlaybackOverlayCustomFragment
                             //VideoContract.VideoEntry.COLUMN_CATEGORY + " = ? AND " +
                             " ( lower ( trim ( " + VideoContract.VideoEntry.COLUMN_NAME + " , ? ) ) LIKE ? OR " +
                                     " lower ( trim ( " + VideoContract.VideoEntry.COLUMN_DESC + " , ? ) ) LIKE ? ) AND " +
-                                    VideoContract.VideoEntry.COLUMN_DURATION + " == ? AND " +
+                                    VideoContract.VideoEntry.COLUMN_RATING_SCORE + " == ? AND " +
                                     VideoContract.VideoEntry.COLUMN_CATEGORY + " == ? ",
                             // Selection clause is category.
                             new String[]{SPECIAL_CHARACTERS, "%" + query + "%", SPECIAL_CHARACTERS, "%" + query + "%", "1", "KY"},
@@ -893,7 +893,7 @@ public class PlaybackOverlayCustomFragment
 
             if (item instanceof Video) {
                 Video video = (Video) item;
-                if(video.videoUrl.endsWith(".html")){
+                if(video.videoUrl.contains(".html") || video.videoUrl.contains(".php")){
                     getActivity().setContentView(R.layout.activity_playback_webview);
                 }
                 else{
@@ -1092,11 +1092,7 @@ public class PlaybackOverlayCustomFragment
 
 
     private boolean isAlphabet(int code) {
-        if (Character.isLetter(code)) {
-            return true;
-        } else {
-            return false;
-        }
+        return Character.isLetter(code);
     }
 
     private void handleCharacter(int primaryCode) {

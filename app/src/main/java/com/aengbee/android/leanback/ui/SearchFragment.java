@@ -208,7 +208,7 @@ public class SearchFragment extends android.support.v17.leanback.app.SearchFragm
                             " lower ( trim ( " + VideoContract.VideoEntry.COLUMN_DESC + " , ? ) ) LIKE ? OR " +
                             " lower ( trim ( " + VideoContract.VideoEntry.COLUMN_NAME + " , ? ) ) LIKE ? OR " +
                             " lower ( trim ( " + VideoContract.VideoEntry.COLUMN_DESC + " , ? ) ) LIKE ? ) AND " +
-                            VideoContract.VideoEntry.COLUMN_DURATION + " == ? ",
+                            VideoContract.VideoEntry.COLUMN_RATING_SCORE + " == ? ",
                     // Selection clause is category.
                     new String[]{SPECIAL_CHARACTERS, "%" + query + "%", SPECIAL_CHARACTERS, "%" + query + "%", SPECIAL_CHARACTERS, queryNormalizer(query), SPECIAL_CHARACTERS, queryNormalizer(query), "1"},
                     VideoContract.VideoEntry.COLUMN_NAME// Default sort order
@@ -222,7 +222,7 @@ public class SearchFragment extends android.support.v17.leanback.app.SearchFragm
                     //VideoContract.VideoEntry.COLUMN_CATEGORY + " = ? AND " +
                     " ( lower ( trim ( " + VideoContract.VideoEntry.COLUMN_NAME + " , ? ) ) LIKE ? OR " +
                             " lower ( trim ( " + VideoContract.VideoEntry.COLUMN_DESC + " , ? ) ) LIKE ? ) AND " +
-                            VideoContract.VideoEntry.COLUMN_DURATION + " == ? " ,
+                            VideoContract.VideoEntry.COLUMN_RATING_SCORE + " == ? " ,
                     // Selection clause is category.
                     new String[]{SPECIAL_CHARACTERS, "%" + query + "%", SPECIAL_CHARACTERS, "%" + query + "%", "1"},
                     VideoContract.VideoEntry.COLUMN_NAME// Default sort order

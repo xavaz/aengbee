@@ -181,6 +181,8 @@ public class GuidedStepActivity extends Activity {
                             .description(serverList.getString(serverList.names().getString(getArguments().getInt(ARG_DB_IDX))))
                             .build();
 
+
+
                     GuidedAction delete = new GuidedAction.Builder()
                             .id(DELETE)
                             .title(getString(R.string.delete))
@@ -200,7 +202,7 @@ public class GuidedStepActivity extends Activity {
                         .id(NEW)
                         .title(getString(R.string.guidedstep_serveraddress))
                         .descriptionEditable(true)
-                        .description("http://ex.com/.json")
+                        .description("http://example.com/.json")
                         .build();
 
 
@@ -305,6 +307,8 @@ public class GuidedStepActivity extends Activity {
                     sharedPreferencesEditor.apply();
 
                 } else {
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                    arg = arg.replace("@usb", sharedPreferences.getString("USB_path",""));
                     Log.d("11", "onGuidedActionClicked: "+2+arg);
                     Intent serviceIntent = new Intent(getActivity(), FetchVideoService.class);
                     serviceIntent.putExtra("data_url", arg);
@@ -323,12 +327,7 @@ public class GuidedStepActivity extends Activity {
                 HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
                 urlConn.setConnectTimeout(5000);
                 urlConn.connect();
-                if(urlConn.getResponseCode() == HttpURLConnection.HTTP_OK){
-                    return true;
-                }
-                else{
-                    return false;
-                }
+                return urlConn.getResponseCode() == HttpURLConnection.HTTP_OK;
             } catch (IOException | NetworkOnMainThreadException e) {
                 Log.d("GuidedStepAcitivity:", "testURL: \"Error creating HTTP connection\""+e.toString());
                 e.printStackTrace();

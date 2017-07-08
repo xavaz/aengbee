@@ -16,7 +16,9 @@
 
 package com.aengbee.android.leanback.ui;
 
+import android.app.Activity;
 import android.app.LoaderManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -26,6 +28,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -99,6 +102,22 @@ public class MainFragment extends BrowseFragment implements LoaderManager.Loader
 
         // Start loading the categories from the database.
         getLoaderManager().initLoader(CATEGORY_LOADER, null, this);
+
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            // Create a list to contain all the CursorObjectAdapters.
+            // Each adapter is used to render a specific row of videos in the MainFragment.
+            mVideoCursorAdapters = new HashMap<>();
+
+            // Start loading the categories from the database.
+            getLoaderManager().initLoader(CATEGORY_LOADER, null, this);
+        }
     }
 
     @Override
@@ -119,6 +138,7 @@ public class MainFragment extends BrowseFragment implements LoaderManager.Loader
         setAdapter(mCategoryRowAdapter);
 
         updateRecommendations();
+
     }
 
     @Override
@@ -234,13 +254,14 @@ public class MainFragment extends BrowseFragment implements LoaderManager.Loader
                     null, // Projection to return - null means return all fields
                     VideoContract.VideoEntry.COLUMN_CATEGORY + " = ?", // Selection clause
                     new String[]{category},  // Select based on the category id.
-                    VideoContract.VideoEntry.COLUMN_RATING_SCORE +" DESC,"+ VideoContract.VideoEntry.COLUMN_NAME// Default sort order
+                    VideoContract.VideoEntry.COLUMN_NAME// Default sort order
             );
         }
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
         if (data != null && data.moveToFirst()) {
             final int loaderId = loader.getId();
 
@@ -306,9 +327,12 @@ public class MainFragment extends BrowseFragment implements LoaderManager.Loader
                     ex.printStackTrace();
                 }
 
+
+                gridRowAdapter.add("Showcase");
+                gridRowAdapter.add(getString(R.string.grid_view));
+                gridRowAdapter.add(getString(R.string.guidedstep_first_title));
+                gridRowAdapter.add(getString(R.string.error_fragment));
                 */
-
-
                 ListRow row = new ListRow(gridHeader, gridRowAdapter);
                 mCategoryRowAdapter.add(row);
 
@@ -318,16 +342,41 @@ public class MainFragment extends BrowseFragment implements LoaderManager.Loader
                 // The CursorAdapter contains a Cursor pointing to all videos.
                 mVideoCursorAdapters.get(loaderId).changeCursor(data);
             }
-        } else {
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            if(!sharedPreferences.getBoolean(OnboardingFragment.COMPLETED_ONBOARDING, false)){
-                Log.d("MainFragment3", "onLoadFinished: "+"serviceIntent Started"+data.moveToFirst()+"|"+data);
+        }
+        else {
+            if(isOnline()){
                 Intent serviceIntent = new Intent(getActivity(), FetchVideoService.class);
-                serviceIntent.putExtra("data_url", getResources().getString(R.string.catalog_url) );
+                //serviceIntent.putExtra("data_url", getResources().getString(R.string.catalog_url) );
+                serviceIntent.putExtra("data_url", "http://fytoz.asuscomm.com/android-tv/tjweb.json" );
                 getActivity().startService(serviceIntent);
             }
-
+            else{
+                Intent serviceIntent = new Intent(getActivity(), FetchVideoService.class);
+                //serviceIntent.putExtra("data_url", getResources().getString(R.string.catalog_url) );
+                serviceIntent.putExtra("data_url", resourceToUri(getActivity(), R.raw.sample).toString());
+                getActivity().startService(serviceIntent);
+            }
         }
+    }
+
+    public static Uri resourceToUri(Context context, int resID) {
+        return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                context.getResources().getResourcePackageName(resID) + '/' +
+                context.getResources().getResourceTypeName(resID) + '/' +
+                context.getResources().getResourceEntryName(resID) );
+    }
+
+    public Boolean isOnline() {
+        try {
+            Process p1 = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.com");
+            int returnVal = p1.waitFor();
+            boolean reachable = (returnVal==0);
+            return reachable;
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override

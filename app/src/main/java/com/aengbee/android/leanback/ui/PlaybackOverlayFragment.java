@@ -86,8 +86,10 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.media.MediaDescriptionCompat;
 import android.support.v4.media.MediaMetadataCompat;
+
 import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.MediaSessionCompat;
+
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.text.TextUtils;
 import android.util.Log;
@@ -120,6 +122,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -141,6 +144,7 @@ public class PlaybackOverlayFragment
     private static final int QUEUE_VIDEOS_LOADER = 2;
     private static final int SEARCH_VIDEOS_LOADER = 3;
     private static PlaybackControlsRow controlsRow;
+    private static int mode = 0;
 
     private static final String SPECIAL_CHARACTERS = "`~!@#$%^&*()-_=+|\\;:'\",<.>/?";
     private KoreanAutomata kauto;
@@ -151,7 +155,7 @@ public class PlaybackOverlayFragment
     private static final int mSymbolsKeyboard = 2;
     public static String mQuery;
     public static List mBook = new ArrayList<String>();
-
+    private ArrayObjectAdapter mListRowAdapter;
 
     static {
         mAutoPlayExtras.putBoolean(AUTO_PLAY, true);
@@ -262,10 +266,10 @@ public class PlaybackOverlayFragment
         mRowsAdapter = new ArrayObjectAdapter(ps);
         controlsRow = mGlue.getControlsRow();
 
-        addInitialRows();
+        PlayMode();
         setAdapter(mRowsAdapter);
         startPlaying();
-        getRowsFragment().setAlignment(150);
+        getRowsFragment().setAlignment(160);
 
     }
 
@@ -359,7 +363,7 @@ public class PlaybackOverlayFragment
                 //VideoContract.VideoEntry.COLUMN_CATEGORY + " = ? AND " +
                 " ( lower ( trim ( " + VideoContract.VideoEntry.COLUMN_NAME + " , ? ) ) LIKE ? OR " +
                         " lower ( trim ( " + VideoContract.VideoEntry.COLUMN_DESC + " , ? ) ) LIKE ? ) AND " +
-                        VideoContract.VideoEntry.COLUMN_DURATION + " == ? AND " +
+                        VideoContract.VideoEntry.COLUMN_RATING_SCORE + " == ? AND " +
                         VideoContract.VideoEntry.COLUMN_CATEGORY + " == ? ",
                 // Selection clause is category.
                 new String[]{SPECIAL_CHARACTERS, "%" + query + "%", SPECIAL_CHARACTERS, "%" + query + "%", "1", "KY"},
@@ -381,11 +385,11 @@ public class PlaybackOverlayFragment
                         getActivity(),
                         VideoContract.VideoEntry.CONTENT_URI,
                         null, // Projection to return - null means return all fields.
-                        VideoContract.VideoEntry._ID + " REGEXP ? OR " +
+                        VideoContract.VideoEntry._ID + " IN ( ? ) OR " +
                         VideoContract.VideoEntry.COLUMN_CARD_IMG + " LIKE ? ", // Selection clause is id.
                         // Selection clause is category.
-                        new String[]{TextUtils.join("|", mBook),"%add.jpg"}, // Select based on the id.
-                        null // Default sort order
+                        new String[]{TextUtils.join(",", mBook),"%add.jpg"}, // Select based on the id.
+                        null//"INSTR (',"+TextUtils.join(",", mBook)+",', ',' || "+ VideoContract.VideoEntry._ID + " || ',')" // Default sort order
                 );
             }
             case SEARCH_VIDEOS_LOADER: {
@@ -398,11 +402,11 @@ public class PlaybackOverlayFragment
                             getActivity(),
                             VideoContract.VideoEntry.CONTENT_URI,
                             null, // Projection to return - null means return all fields.
-                            VideoContract.VideoEntry._ID + " REGEXP ? OR " +
+                            VideoContract.VideoEntry._ID + " IN ( ? ) OR " +
                                     VideoContract.VideoEntry.COLUMN_CARD_IMG + " LIKE ? ", // Selection clause is id.
                             // Selection clause is category.
-                            new String[]{TextUtils.join("|", mBook),"%add.jpg"}, // Select based on the id.
-                            null // Default sort order
+                            new String[]{TextUtils.join(",", mBook),"%add.jpg"}, // Select based on the id.
+                            null//"INSTR (',"+TextUtils.join(",", mBook)+",', ',' || "+ VideoContract.VideoEntry._ID + " || ',')" // Default sort order
                     );
                 }
                 else
@@ -413,32 +417,39 @@ public class PlaybackOverlayFragment
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+
         if (cursor != null && cursor.moveToFirst()) {
-            if(cursor.getCount()==mBook.size()+1){
-                //mQueue.clear();
-                while (!cursor.isAfterLast()) {
-                    Video v = (Video) mVideoCursorMapper.convert(cursor);
-                    // Set the queue index to the selected video.
-                    if (v.id == mSelectedVideo.id) {
-                        mQueueIndex = mQueue.size();
+
+                if(cursor.getCount() == mBook.size()+1) {
+                    //mQueue.clear();
+                    while (!cursor.isAfterLast()) {
+                        Video v = (Video) mVideoCursorMapper.convert(cursor);
+
+                        // Set the queue index to the selected video.
+                        if (v.id == mSelectedVideo.id) {
+                            mQueueIndex = mQueue.size();
+                        }
+
+                        // Add the video to the queue.
+                        MediaSessionCompat.QueueItem item = getQueueItem(v);
+                        if (!mQueue.contains(item))
+                            mQueue.add(item);
+                        //mQueue.add(item);
+
+                        cursor.moveToNext();
                     }
-                    // Add the video to the queue.
-                    MediaSessionCompat.QueueItem item = getQueueItem(v);
-                    if(!mQueue.contains(item))
-                        mQueue.add(item);
 
-                    cursor.moveToNext();
+                    mSession.setQueue(mQueue);
+                    mSession.setQueueTitle(getString(R.string.queue_name));
+                    mVideoCursorAdapter.changeCursor(cursor);
+
                 }
-
-                mSession.setQueue(mQueue);
-                mSession.setQueueTitle(getString(R.string.queue_name));
-                mVideoCursorAdapter.changeCursor(cursor);
-            }
-            else{
-                mVideoCursorAdapter.changeCursor(cursor);
+                else{
+                    mVideoCursorAdapter.changeCursor(cursor);
+                }
             }
 
-        }
+
     }
 
     @Override
@@ -577,8 +588,8 @@ public class PlaybackOverlayFragment
     /**
      * Creates a ListRow for related videos.
      */
-    private void addInitialRows() {
-
+    private void PlayMode() {
+        mode = 0;
         if(mRowsAdapter.size()>0)
             mRowsAdapter.clear();
 
@@ -587,18 +598,21 @@ public class PlaybackOverlayFragment
         mVideoCursorAdapter = new CursorObjectAdapter(new CardPresenter());
         mVideoCursorAdapter.setMapper(new VideoCursorMapper());
 
-        //mBook.add(String.valueOf(mSelectedVideo.id));
+        if(mSpecificVideoLoaderId==4)
+            mBook.add(String.valueOf(mSelectedVideo.id));
         Bundle args = new Bundle();
-        args.putString(VideoContract.VideoEntry.COLUMN_DESC, mSelectedVideo.description);
-        args.putInt("state", RECOMMENDED_VIDEOS_LOADER);
+        //args.putString(VideoContract.VideoEntry.COLUMN_DESC, mSelectedVideo.description);
+        args.putInt("state", QUEUE_VIDEOS_LOADER);
         getLoaderManager().restartLoader(mSpecificVideoLoaderId++, args, mCallbacks);
         HeaderItem header = new HeaderItem(getString(R.string.related_movies));
         mRowsAdapter.add(new ListRow(header, mVideoCursorAdapter));
 
         updatePlaybackRow();
+
     }
 
-    private void addSearchRows() {
+    private void SearchMode() {
+        mode = 1;
         mRowsAdapter.clear();
         mRowsAdapter.add(createRows(currentKeyboard));
 
@@ -612,6 +626,8 @@ public class PlaybackOverlayFragment
 
         HeaderItem header = new HeaderItem(getString(R.string.related_movies));
         mRowsAdapter.add(new ListRow(header, mVideoCursorAdapter));
+        mQuery = null;
+
     }
 
     private Row createRows(int i) {
@@ -819,7 +835,7 @@ public class PlaybackOverlayFragment
         // Start loading videos for the queue
         Bundle args = new Bundle();
         args.putInt("state", QUEUE_VIDEOS_LOADER);
-        //getLoaderManager().restartLoader(mSpecificVideoLoaderId++, args, mCallbacks);
+        getLoaderManager().restartLoader(mSpecificVideoLoaderId++, args, mCallbacks);
     }
 
     private final class ItemViewClickedListener implements OnItemViewClickedListener {
@@ -829,29 +845,34 @@ public class PlaybackOverlayFragment
 
             if (item instanceof Video) {
 
-                if(((Video) item).cardImageUrl.endsWith("add.jpg")){
-                    addSearchRows();
-                }
-                else if(mQuery!=null && !mQuery.isEmpty()){
+                if(mode == 1){
+                    Toast.makeText(getActivity(), "SearchMode", Toast.LENGTH_SHORT).show();
                     kauto.FinishAutomataWithoutInput();
-                    mQuery = null;
+                    //mQuery = null;
 
                     Video v = (Video) item;
                     // Add the video to the queue.
+                    /*
                     MediaSessionCompat.QueueItem items = getQueueItem(v);
                     if(!mQueue.contains(items)){
                         mQueue.add(items);
                         mSession.setQueue(mQueue);
                         mSession.setQueueTitle(getString(R.string.queue_name));
                     }
-
+                    */
 
                     mBook.add(String.valueOf(((Video) item).id));
-                    addInitialRows();
+                    PlayMode();
+
                 }
-                else if(!((Video) item).cardImageUrl.endsWith("add.jpg")){
+                if(mode == 0 && ((Video) item).cardImageUrl.endsWith("add.jpg")){
+                    Toast.makeText(getActivity(), "PlayMode&add", Toast.LENGTH_SHORT).show();
+                    SearchMode();
+                }
+                else {
+                    Toast.makeText(getActivity(), "PlayMode", Toast.LENGTH_SHORT).show();
                     Video video = (Video) item;
-                    if (video.videoUrl.endsWith(".html")) {
+                    if (video.videoUrl.contains(".html") || video.videoUrl.contains(".php")) {
                         getActivity().setContentView(R.layout.activity_playback_webview);
                     } else {
                         Intent intent = new Intent(getActivity(), PlaybackOverlayActivity.class);
@@ -1048,11 +1069,7 @@ public class PlaybackOverlayFragment
 
 
     private boolean isAlphabet(int code) {
-        if (Character.isLetter(code)) {
-            return true;
-        } else {
-            return false;
-        }
+        return Character.isLetter(code);
     }
 
     private void handleCharacter(int primaryCode) {
@@ -1169,6 +1186,26 @@ public class PlaybackOverlayFragment
             //keyDownUp(KeyEvent.KEYCODE_DEL);
         }
         //updateShiftKeyState(getCurrentInputEditorInfo());
+    }
+
+
+
+    private void updateNowPlayingList(List<MediaSessionCompat.QueueItem> queue, long activeQueueId) {
+        if (mListRowAdapter != null) {
+            mListRowAdapter.clear();
+            if (activeQueueId != MediaSessionCompat.QueueItem.UNKNOWN_ID) {
+                Iterator<MediaSessionCompat.QueueItem> iterator = queue.iterator();
+                while (iterator.hasNext()) {
+                    MediaSessionCompat.QueueItem queueItem = iterator.next();
+                    if (activeQueueId != queueItem.getQueueId()) {
+                        iterator.remove();
+                    } else {
+                        break;
+                    }
+                }
+            }
+            mListRowAdapter.addAll(0, queue);
+        }
     }
 
 

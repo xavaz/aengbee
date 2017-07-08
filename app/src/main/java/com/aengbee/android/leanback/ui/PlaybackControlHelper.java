@@ -77,14 +77,14 @@ class PlaybackControlHelper extends PlaybackControlGlue {
 
         mRewindAction = (PlaybackControlsRow.RewindAction) getPrimaryActionsAdapter()
                 .lookup(ACTION_REWIND);
-
+        /*
         adapter.add(mThumbsDownAction);
         adapter.add(mRepeatAction);
         adapter.add(mThumbsUpAction);
         if (PlaybackOverlayActivity.supportsPictureInPicture(getContext())) {
             adapter.add(mPipAction);
         }
-
+        */
         presenter.setOnActionClickedListener(new OnActionClickedListener() {
             @Override
             public void onActionClicked(Action action) {

@@ -15,12 +15,6 @@
      limitations under the License.
 -->
 <resources>
-    <style name="Widget.Example.Leanback.Title.Text" parent="Widget.Leanback.Title.Text">
-    </style>
-
-    <style name="Widget.Example.Leanback.Rows.VerticalGridView" parent="Widget.Leanback.Rows.VerticalGridView">
-        <item name="android:paddingTop">96dp</item>
-    </style>
 
     <style name="Widget.Example.Leanback.GuidanceIconStyle" parent="Widget.Leanback.GuidanceIconStyle">
         <item name="android:background">@color/icon_background</item>

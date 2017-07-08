@@ -14,22 +14,36 @@
 
 package com.aengbee.android.leanback.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v17.preference.LeanbackPreferenceFragment;
 import android.support.v17.preference.LeanbackSettingsFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.DialogPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.aengbee.android.leanback.R;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 
 public class SettingsFragment extends LeanbackSettingsFragment
         implements DialogPreference.TargetFragment {
     private final static String PREFERENCE_RESOURCE_ID = "preferenceResource";
     private final static String PREFERENCE_ROOT = "root";
     private PreferenceFragment mPreferenceFragment;
+    private static final String TAG = "SettingsFragment";
 
     @Override
     public void onPreferenceStartInitialScreen() {
@@ -77,6 +91,37 @@ public class SettingsFragment extends LeanbackSettingsFragment
             } else {
                 setPreferencesFromResource(prefResId, root);
             }
+            getPreferenceScreen().findPreference(getString(R.string.pref_key_mixing)).setOnPreferenceChangeListener(
+                    new Preference.OnPreferenceChangeListener() {
+                        public boolean onPreferenceChange(Preference p, Object newValue) {
+                            if(isAppInstalled("com.mxtech.videoplayer.pro")) {
+                                return true;
+                            }
+                            else{
+                                Toast.makeText(getActivity(),getString(R.string.install_mxplayer),Toast.LENGTH_LONG).show();
+                                return false;
+                            }
+                        }
+                    }
+            );
+
+            getPreferenceScreen().findPreference(getString(R.string.pref_key_USB)).setOnPreferenceChangeListener(
+                    new Preference.OnPreferenceChangeListener() {
+                        public boolean onPreferenceChange(Preference p, Object newValue) {
+                            if(newValue.equals(new Boolean(true))) {
+                                Toast.makeText(getActivity(),"USE USB STORAGE",Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getActivity(), TextEditActivity.class));
+                                return true;
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"Disabled USB STORAGE",Toast.LENGTH_SHORT).show();
+                                return true;
+                            }
+                        }
+                    }
+            );
+
+
         }
 
         @Override
@@ -88,7 +133,24 @@ public class SettingsFragment extends LeanbackSettingsFragment
                 // Open an AuthenticationActivity
                 startActivity(new Intent(getActivity(), GuidedStepActivity.class));
             }
+
             return super.onPreferenceTreeClick(preference);
         }
+
+        private boolean isAppInstalled(String packageName) {
+            PackageManager pm = getActivity().getPackageManager();
+            try {
+                pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+                return pm.getApplicationInfo(packageName, 0).enabled;
+            }
+            catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+
+
+
     }
 }

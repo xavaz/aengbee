@@ -16,8 +16,10 @@
 
 package com.aengbee.android.leanback.presenter;
 
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 import android.support.v17.leanback.widget.ImageCardView;
 import android.support.v17.leanback.widget.Presenter;
 import android.support.v4.content.ContextCompat;
@@ -84,6 +86,7 @@ public class CardPresenter extends Presenter {
             int width = res.getDimensionPixelSize(R.dimen.card_width);
             int height = res.getDimensionPixelSize(R.dimen.card_height);
             cardView.setMainImageDimensions(width, height);
+
 
             Glide.with(cardView.getContext())
                     .load(video.cardImageUrl)

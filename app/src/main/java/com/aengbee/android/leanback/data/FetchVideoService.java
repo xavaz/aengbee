@@ -56,8 +56,6 @@ public class FetchVideoService extends IntentService {
             getApplicationContext().getContentResolver().bulkInsert(VideoContract.VideoEntry.CONTENT_URI,
                     downloadedVideoContentValues);
 
-
-
         } catch (IOException | JSONException e) {
             Log.e(TAG, "Error occurred in downloading videos");
             e.printStackTrace();

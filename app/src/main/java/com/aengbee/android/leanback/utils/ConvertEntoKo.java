@@ -191,9 +191,9 @@ public class ConvertEntoKo {
     public String combineKor(List<Map<String, Integer>> list) {
         String lastStr = "";
         for (int i = 0; i < list.size(); i++) {
-            int a = (int) (list.get(i)).get("cho");
-            int b = (int) (list.get(i)).get("jun");
-            int c = (int) (list.get(i)).get("jon");
+            int a = (list.get(i)).get("cho");
+            int b = (list.get(i)).get("jun");
+            int c = (list.get(i)).get("jon");
 
             char temp = (char) (0xAC00 + 28 * 21 * (a) + 28 * (b) + (c));
 
@@ -210,7 +210,7 @@ public class ConvertEntoKo {
 
 
     // 코드타입 - 초성, 중성, 종성
-    static enum CodeType {
+    enum CodeType {
         chosung,
         jungsung,
         jongsung

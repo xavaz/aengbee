@@ -30,6 +30,11 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"  />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"  />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <uses-feature
         android:name="android.hardware.microphone"
         android:required="false" />
@@ -122,7 +127,15 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
+        <receiver android:name="com.aengbee.android.leanback.mount.UsbBroadcastReceiver"
+            android:exported="true"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                <action android:name="android.intent.action.MEDIA_EJECT" />
+                <data android:scheme="file" />
+            </intent-filter>
+        </receiver>
         <service
             android:name="com.aengbee.android.leanback.data.FetchVideoService"
             android:exported="false" />
@@ -141,7 +154,9 @@
         <activity
             android:name="com.aengbee.android.leanback.ui.AuthenticationActivity"
             android:theme="@style/Theme.Example.Leanback.GuidedStep" />
-
+        <activity
+            android:name="com.aengbee.android.leanback.ui.TextEditActivity"
+            android:theme="@style/Theme.Example.Leanback.GuidedStep" />
 
 
         <activity

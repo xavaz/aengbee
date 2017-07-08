@@ -16,22 +16,29 @@
 -->
 
 <resources>
+    <string name="connect_usb">USB스토리지를 연결해주세요.</string>
+    <string name="pref_title_USB">외장USB 라이브러리</string>
+    <string name="pref_key_USB">pref_usb</string>
+
+    <string name="autoUpdate_checkbox">자동 업데이트</string>
+    <string name="install_mxplayer">이 기능사용을 원하시면 MX플레이어Pro를 설치하여 주십시오.(com.mxtech.videoplayer.pro)</string>
+    <string name="device_not_supported">미지원 기기</string>
+    <string name="device_not_supported_message">FFmpeg가 이 기기에서 지원되지 않습니다.</string>
     <string name="app_name"><![CDATA[앵벌]]></string>
     <string name="browse_title"><![CDATA[안드로이드 TV]]></string>
     <string name="related_movies">연관 아이템</string>
     <string name="vertical_grid_title"><![CDATA[세로 비디오 그리드]]></string>
 
-    <string name="popular_header">인기</string>
     <string name="more_samples">설정</string>
     <string name="grid_view">세로 그리드 뷰</string>
     <string name="error_fragment">에러 화면</string>
     <string name="personal_settings">개인설정</string>
-    <string name="watch_trailer_1">재생</string>
-    <string name="watch_trailer_2">시작</string>
-    <string name="rent_1">연관</string>
-    <string name="rent_2">아이템</string>
-    <string name="buy_1">메뉴3</string>
-    <string name="buy_2">설명</string>
+    <string name="watch_trailer_1">시작</string>
+    <string name="watch_trailer_2">재생</string>
+    <string name="rent_1">재생</string>
+    <string name="rent_2">영상</string>
+    <string name="buy_1">연관</string>
+    <string name="buy_2">아이템</string>
     <string name="queue_name">재생목록 재생</string>
 
     <string name="search_results">\'%1$s\'에 대한 검색결과</string>
@@ -40,7 +47,6 @@
 
     <!-- Error messages -->
 
-    <string name="videos_loading_error">비디오를 불러오는데 실패하였습니다. 네트워크 연결을 확인해 주세요.</string>
     <string name="error_fragment_message">에러 발생</string>
     <string name="dismiss_error">닫기</string>
 
@@ -57,23 +63,6 @@
     <!-- The description that will show up in the search settings for this source.  -->
     <string name="settings_description">Leanback API Demo Videos</string>
 
-    <string name="noah_description">to build an Ark to save creation from the coming flood.</string>
-    <string name="noah_title">Noah</string>
-    <string name="dragon2_title">How to Train Your Dragon 2</string>
-    <string name="dragon2_description">Set in the mythical world of burly Vikings and wild dragons,
-        and based on the book by Cressida Cowell, the action comedy tells the story of Hiccup, a
-        Viking teenager who doesn\'t exactly fit in with his tribe\'s longstanding tradition of
-        heroic dragon slayers. Hiccup\'s world is turned upside down when he encounters a dragon
-        that challenges he and his fellow Vikings to see the world from an entirely different point
-        of view.
-    </string>
-    <string name="maleficent_title">Maleficent</string>
-    <string name="maleficent_description">The untold story of Disney\'s most iconic villain from the
-        1959 classic "Sleeping Beauty." A beautiful, pure-hearted young woman with stunning black
-        wings, Maleficent has an idyllic life growing up in a peaceable forest kingdom, until one
-        day when an invading army of humans threatens the harmony of the land.
-    </string>
-
     <!-- Strings related to guided sequence activity -->
     <string name="guidedstep_first_title">데이터베이스 목록</string>
     <string name="guidedstep_first_description">수정할 데이터베이스를 선택하세요.</string>
@@ -84,19 +73,13 @@
     <string name="guidedstep_third_title">가이드 단계 셋째 페이지</string>
     <string name="guidedstep_third_breadcrumb">가이드 단계: 3</string>
     <string name="guidedstep_third_command">당신은 다음과 같이 응답하였습니다.: </string>
-    <string name="guidedstep_action_description">설명은 꽤나 길 수 있습니다. 그렇지만 명심하십시오. GuidedAction 에서 multilineDescript을 true 값으로 하는 것을 잊지 마십시오.
-    </string>
-    <string name="guidedstep_action_title">
-        가이드 액션은 꽤나 긴 제목을 가질 수 있다는 것을 알아두세요.
-    </string>
     <string name="guidedstep_continue">계속</string>
-    <string name="guidedstep_letsdoit">다음</string>
-    <string name="guidedstep_nevermind">그만</string>
     <string name="guidedstep_cancel">취소</string>
 
     <string name="guidedstep_serveraddress">서버 주소</string>
     <string name="delete">삭제</string>
     <string name="save">저장</string>
+    <string name="edit">수정</string>
     <string name="back">뒤로</string>
     <string name="yes">네</string>
     <string name="no">아니오</string>
@@ -121,11 +104,10 @@
     <string name="onboarding_description_simple">정말 쉽습니다. 단순히 리모컨의 버튼을 눌러 화면상에서 이동하고 검색하며 재생을 시작합니다. 그게 설명의 전부입니다. </string>
     <string name="onboarding_description_project">자, 이제 준비되셨나요? 이제 시작해 봅시다.</string>
     <string name="pref_title_settings">앱 설정</string>
-    <string name="pref_title_recommendations">메인화면 아이템 추천기능 사용</string>
+    <string name="pref_title_recommendations">아이템 추천</string>
     <string name="pref_key_recommendations">pref_recommendations</string>
-    <string name="pref_key_screen_general">general_settings</string>
-    <string name="pref_title_screen_general">일반 설정</string>
-    <string name="pref_key_screen_signin">signin</string>
+    <string name="pref_title_mixing">비디오 믹싱</string>
+    <string name="pref_key_mixing">pref_mixing</string>
     <string name="pref_title_screen_signin">로그인 해주세요.</string>
     <string name="pref_title_login_description">사용자명과 패스워드를 입력해 주세요.</string>
     <string name="pref_title_username">사용자명</string>
@@ -150,7 +132,6 @@
     <string name="header_recommended">Recommended</string>
 
     <!-- Page/List Row -->
-    <string name="page_list_row_title">Page and List Row</string>
 
     <!-- Dialog example -->
     <string name="dialog_example_title">Use Google\'s location service?</string>
@@ -168,7 +149,6 @@
     <string name="wizard_example_input_card">Enter credit card number</string>
     <string name="wizard_example_expiration_date">Exp. date</string>
     <string name="wizard_example_payment_method">Payment Method</string>
-    <string name="wizard_example_toast_payment_method_clicked">\'Payment Method\' clicked.</string>
     <string name="wizard_example_rent">Rent</string>
     <string name="wizard_example_rent_hd">Rent HD</string>
     <string name="wizard_example_rent_sd">Rent SD</string>

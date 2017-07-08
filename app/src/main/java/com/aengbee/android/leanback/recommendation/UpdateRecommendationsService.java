@@ -63,11 +63,25 @@ public class UpdateRecommendationsService extends IntentService {
         }
     }
 
+    public Boolean isOnline() {
+        try {
+            Process p1 = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.com");
+            int returnVal = p1.waitFor();
+            boolean reachable = (returnVal==0);
+            return reachable;
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
     @Override
     protected void onHandleIntent(Intent intent) {
         // Generate recommendations, but only if recommendations are enabled
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (!sharedPreferences.getBoolean(getString(R.string.pref_key_recommendations), true)) {
+        if (!sharedPreferences.getBoolean(getString(R.string.pref_key_recommendations), true) || !isOnline()) {
             Log.d(TAG, "Recommendations disabled");
             mNotifManager.cancelAll();
             return;

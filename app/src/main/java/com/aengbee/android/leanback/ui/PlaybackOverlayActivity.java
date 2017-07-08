@@ -48,7 +48,7 @@ public class PlaybackOverlayActivity extends LeanbackActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Video video = this.getIntent().getParcelableExtra(VideoDetailsActivity.VIDEO);
-        if(video.videoUrl.endsWith(".html")){
+        if(video.videoUrl.contains(".html") || video.videoUrl.contains(".php")){
             setContentView(R.layout.activity_playback_webview);
         } else {
             setContentView(R.layout.activity_playback);

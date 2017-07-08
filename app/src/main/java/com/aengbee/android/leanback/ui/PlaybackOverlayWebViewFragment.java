@@ -1,14 +1,18 @@
 package com.aengbee.android.leanback.ui;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v17.leanback.app.BrowseFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
+import android.webkit.WebSettings;
+import android.widget.Toast;
 
 import com.aengbee.android.leanback.model.Video;
 
@@ -41,12 +45,14 @@ public class PlaybackOverlayWebViewFragment extends Fragment implements BrowseFr
                 FrameLayout.LayoutParams.MATCH_PARENT);
         lp.setMarginStart(32);
         mWebview = new WebView(getActivity());
+        mWebview.addJavascriptInterface(new WebAppInterface(getActivity()), "Android");
         mWebview.setWebViewClient(new WebViewClient());
         mWebview.getSettings().setJavaScriptEnabled(true);
         mWebview.getSettings().setMediaPlaybackRequiresUserGesture(false);
         Video video = getActivity().getIntent().getParcelableExtra(VideoDetailsActivity.VIDEO);
-        mWebview.loadUrl(video.videoUrl);
         root.addView(mWebview, lp);
+        mWebview.loadUrl(video.videoUrl);
+
         return root;
     }
 
@@ -73,4 +79,19 @@ public class PlaybackOverlayWebViewFragment extends Fragment implements BrowseFr
         mWebview = null;
         super.onDestroy();
     }
+
+    public class WebAppInterface {
+        Context mContext;
+        /** Instantiate the interface and set the context */
+        WebAppInterface(Context c) {
+            mContext = c;
+        }
+        /** Show a toast from the web page */
+        @JavascriptInterface
+        public void exitActivity() {
+            getActivity().finish();
+        }
+    }
+
+
 }
