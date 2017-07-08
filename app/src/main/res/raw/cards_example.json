@@ -1,0 +1,491 @@
+[
+  {
+    "type" : 1,
+    "title": "ImageCardView Examples"
+  },
+  {
+    "title": "One Line Title",
+    "cards": [
+      {
+        "type": "MOVIE",
+        "title": "Deep Into The Deep Sleep",
+        "description": "$3.99",
+        "localImageResource": "card_image_movie_01"
+      },
+      {
+        "type": "MOVIE",
+        "title": "We",
+        "description": "$3.99",
+        "localImageResource": "card_image_movie_02"
+      },
+      {
+        "type": "MOVIE",
+        "title": "The Fairy Story Of A Legend",
+        "description": "$3.99",
+        "localImageResource": "card_image_movie_03"
+      },
+      {
+        "type": "MOVIE",
+        "title": "Cursed",
+        "description": "$3.99",
+        "localImageResource": "card_image_movie_04"
+      },
+      {
+        "type": "MOVIE",
+        "title": "My Crazy One",
+        "description": "$3.99",
+        "localImageResource": "card_image_movie_05"
+      },
+      {
+        "type": "MOVIE",
+        "title": "Gone",
+        "description": "$3.99",
+        "localImageResource": "card_image_movie_06"
+      },
+      {
+        "type": "MOVIE",
+        "title": "A Cold Night To Stay",
+        "description": "$3.99",
+        "localImageResource": "card_image_movie_07"
+      },
+      {
+        "type": "MOVIE",
+        "title": "The Silence",
+        "description": "$3.99",
+        "localImageResource": "card_image_movie_08"
+      },
+      {
+        "type": "MOVIE",
+        "title": "Hear The Roar",
+        "description": "$3.99",
+        "localImageResource": "card_image_movie_09"
+      }
+    ]
+  },
+  {
+    "title": "Two Line Title + Icon",
+    "cards": [
+      {
+        "type": "MOVIE_BASE",
+        "title": "Deep Into The Deep Sleep",
+        "localImageResource": "card_image_movie_01"
+      },
+      {
+        "type": "MOVIE_BASE",
+        "title": "We",
+        "localImageResource": "card_image_movie_02"
+      },
+      {
+        "type": "MOVIE_BASE",
+        "title": "The Fairy Story Of A Legend",
+        "localImageResource": "card_image_movie_03"
+      },
+      {
+        "type": "MOVIE_BASE",
+        "title": "Cursed",
+        "localImageResource": "card_image_movie_04"
+      },
+      {
+        "type": "MOVIE_BASE",
+        "title": "My Crazy One",
+        "localImageResource": "card_image_movie_05"
+      },
+      {
+        "type": "MOVIE_BASE",
+        "title": "Gone",
+        "localImageResource": "card_image_movie_06"
+      },
+      {
+        "type": "MOVIE_BASE",
+        "title": "A Cold Night To Stay",
+        "localImageResource": "card_image_movie_07"
+      },
+      {
+        "type": "MOVIE_BASE",
+        "title": "The Silence",
+        "localImageResource": "card_image_movie_08"
+      },
+      {
+        "type": "MOVIE_BASE",
+        "title": "Hear The Roar",
+        "localImageResource": "card_image_movie_09"
+      }
+    ]
+  },
+  {
+    "title": "Two Line Title + Description + Icon",
+    "cards": [
+      {
+        "type": "MOVIE_COMPLETE",
+        "description": "$3.99",
+        "title": "Deep Into The Deep Sleep",
+        "footerIconLocalImageResource": "stars_red",
+        "localImageResource": "card_image_movie_01"
+      },
+      {
+        "type": "MOVIE_COMPLETE",
+        "title": "We",
+        "description": "$3.99",
+        "footerIconLocalImageResource": "stars_red",
+        "localImageResource": "card_image_movie_02"
+      },
+      {
+        "type": "MOVIE_COMPLETE",
+        "title": "The Fairy",
+        "description": "$3.99",
+        "footerIconLocalImageResource": "stars_red",
+        "localImageResource": "card_image_movie_03"
+      },
+      {
+        "type": "MOVIE_COMPLETE",
+        "title": "Cursed",
+        "description": "$3.99",
+        "footerIconLocalImageResource": "stars_red",
+        "localImageResource": "card_image_movie_04"
+      },
+      {
+        "type": "MOVIE_COMPLETE",
+        "title": "My Crazy One",
+        "description": "$3.99",
+        "footerIconLocalImageResource": "stars_red",
+        "localImageResource": "card_image_movie_05"
+      },
+      {
+        "type": "MOVIE_COMPLETE",
+        "title": "Gone",
+        "description": "$3.99",
+        "footerIconLocalImageResource": "stars_red",
+        "localImageResource": "card_image_movie_06"
+      },
+      {
+        "type": "MOVIE_COMPLETE",
+        "title": "A Cold Night To Stay",
+        "description": "$3.99",
+        "footerIconLocalImageResource": "stars_red",
+        "localImageResource": "card_image_movie_07"
+      },
+      {
+        "type": "MOVIE_COMPLETE",
+        "description": "$3.99",
+        "title": "The Silence",
+        "footerIconLocalImageResource": "stars_red",
+        "localImageResource": "card_image_movie_08"
+      },
+      {
+        "type": "MOVIE_COMPLETE",
+        "title": "Hear The Roar",
+        "description": "$3.99",
+        "footerIconLocalImageResource": "stars_red",
+        "localImageResource": "card_image_movie_09"
+      }
+    ]
+  },
+  {
+    "title": "Title + Description",
+    "cards": [
+      {
+        "type": "SQUARE_BIG",
+        "title": "Blue in Green",
+        "description": "Miles Davis",
+        "footerColor": "#bf360C",
+        "localImageResource": "card_image_music_02"
+      },
+      {
+        "type": "SQUARE_BIG",
+        "title": "Blue in Green",
+        "description": "Miles Davis",
+        "footerColor": "#b93221",
+        "localImageResource": "card_image_music_03"
+      },
+      {
+        "type": "SQUARE_BIG",
+        "title": "Blue in Green",
+        "description": "Miles Davis",
+        "footerColor": "#311b92",
+        "localImageResource": "card_image_music_04"
+      },
+      {
+        "type": "SQUARE_BIG",
+        "title": "Blue in Green",
+        "description": "Miles Davis",
+        "footerColor": "#33691e",
+        "localImageResource": "card_image_music_05"
+      },
+      {
+        "type": "SQUARE_BIG",
+        "title": "Blue in Green",
+        "description": "Miles Davis",
+        "footerColor": "#37474f",
+        "localImageResource": "card_image_music_06"
+      },
+      {
+        "type": "SQUARE_BIG",
+        "title": "Blue in Green",
+        "description": "Miles Davis",
+        "footerColor": "#3e2723",
+        "localImageResource": "card_image_music_08"
+      },
+      {
+        "type": "SQUARE_BIG",
+        "title": "Blue in Green",
+        "description": "Miles Davis",
+        "footerColor": "#01579B",
+        "localImageResource": "card_image_music_09"
+      }
+    ]
+  },
+  {
+    "title": "Title + Description + Icon",
+    "cards": [
+      {
+        "type": "GAME",
+        "title": "Crazy One",
+        "description": "Purchased",
+        "localImageResource": "game_crazy_one",
+        "footerIconLocalImageResource": "ic_installed"
+      },
+      {
+        "type": "GAME",
+        "title": "Cursed",
+        "description": "Purchased",
+        "localImageResource": "game_cursed",
+        "footerIconLocalImageResource": "ic_installed"
+      },
+      {
+        "type": "GAME",
+        "title": "fairy",
+        "description": "Purchased",
+        "localImageResource": "game_fairy",
+        "footerIconLocalImageResource": "ic_installed"
+      },
+      {
+        "type": "GAME",
+        "title": "Hear The Roar",
+        "description": "Purchased",
+        "localImageResource": "game_hear_the_roar",
+        "footerIconLocalImageResource": "ic_installed"
+      },
+      {
+        "type": "GAME",
+        "title": "Silence",
+        "description": "Purchased",
+        "localImageResource": "game_silence",
+        "footerIconLocalImageResource": "ic_installed"
+      }
+    ]
+  },
+  {
+    "title": "Title + Description (Wide)",
+    "cards": [
+      {
+        "type": "DEFAULT",
+        "title": "Marseille sea food tour",
+        "description": "9,089 views   3 years ago   by ADELAIDE",
+        "localImageResource": "coffee_and_tea_01"
+      },
+      {
+        "type": "DEFAULT",
+        "title": "Marseille sea food tour",
+        "description": "9,089 views   3 years ago   by ADELAIDE",
+        "localImageResource": "coffee_and_tea_02"
+      },
+      {
+        "type": "DEFAULT",
+        "title": "Marseille sea food tour",
+        "description": "9,089 views   3 years ago   by ADELAIDE",
+        "localImageResource": "coffee_and_tea_03"
+      },
+      {
+        "type": "DEFAULT",
+        "title": "Marseille sea food tour",
+        "description": "9,089 views   3 years ago   by ADELAIDE",
+        "localImageResource": "coffee_and_tea_04"
+      },
+      {
+        "type": "DEFAULT",
+        "title": "Marseille sea food tour",
+        "description": "9,089 views   3 years ago   by ADELAIDE",
+        "localImageResource": "coffee_and_tea_05"
+      },
+      {
+        "type": "DEFAULT",
+        "title": "Marseille sea food tour",
+        "description": "9,089 views   3 years ago   by ADELAIDE",
+        "localImageResource": "coffee_and_tea_06"
+      },
+      {
+        "type": "DEFAULT",
+        "title": "Marseille sea food tour",
+        "description": "9,089 views   3 years ago   by ADELAIDE",
+        "localImageResource": "coffee_and_tea_07"
+      },
+      {
+        "type": "DEFAULT",
+        "title": "Marseille sea food tour",
+        "description": "9,089 views   3 years ago   by ADELAIDE",
+        "localImageResource": "coffee_and_tea_08"
+      }
+    ]
+  },
+  {
+    "type" : 2
+  },
+  {
+    "type" : 1,
+    "title": "Advanced Examples"
+  },
+  {
+    "title": "BaseCardView Info On The Right",
+    "cards": [
+      {
+        "type": "SIDE_INFO",
+        "title": "사쿠라코 씨의 발밑에는 시체가 묻혀 있다.",
+        "description": "TBS 미즈키 아리사",
+        "extraText": "미즈키 아리사가 26년 연속 주연 작품 <사쿠라코 씨의 발밑에는 시체가 묻혀있다>가 어제 스타트했습니다. 1화 시청률은 6.9%였습니다. 역시나 제일 낮을것같더니",
+        "localImageResource": "card_image_music_02"
+      },
+      {
+        "type": "SIDE_INFO",
+        "title": "The Life Aquatic",
+        "description": "Seu Jorge",
+        "extraText": "Bacon ipsum dolor amet bresaola kevin tenderloin swine shoulder strip steak t-bone picanha turducken beef. Ribeye turkey t-bone pastrami meatball corned beef. Pork belly landjaeger short ribs ground round cupim, brisket ham tri-tip. Pig pork loin hamburger picanha ribeye, pork belly meatball chicken ham boudin sirloin corned beef frankfurter ham hock.",
+        "localImageResource": "card_image_music_03"
+      },
+      {
+        "type": "SIDE_INFO",
+        "title": "The Life Aquatic",
+        "description": "Seu Jorge",
+        "extraText": "Bacon ipsum dolor amet bresaola kevin tenderloin swine shoulder strip steak t-bone picanha turducken beef. Ribeye turkey t-bone pastrami meatball corned beef. Pork belly landjaeger short ribs ground round cupim, brisket ham tri-tip. Pig pork loin hamburger picanha ribeye, pork belly meatball chicken ham boudin sirloin corned beef frankfurter ham hock.",
+        "localImageResource": "card_image_music_04"
+      },
+      {
+        "type": "SIDE_INFO",
+        "title": "The Life Aquatic",
+        "description": "Seu Jorge",
+        "extraText": "Bacon ipsum dolor amet bresaola kevin tenderloin swine shoulder strip steak t-bone picanha turducken beef. Ribeye turkey t-bone pastrami meatball corned beef. Pork belly landjaeger short ribs ground round cupim, brisket ham tri-tip. Pig pork loin hamburger picanha ribeye, pork belly meatball chicken ham boudin sirloin corned beef frankfurter ham hock.",
+        "localImageResource": "card_image_music_05"
+      },
+      {
+        "type": "SIDE_INFO",
+        "title": "The Life Aquatic",
+        "description": "Seu Jorge",
+        "extraText": "Bacon ipsum dolor amet bresaola kevin tenderloin swine shoulder strip steak t-bone picanha turducken beef. Ribeye turkey t-bone pastrami meatball corned beef. Pork belly landjaeger short ribs ground round cupim, brisket ham tri-tip. Pig pork loin hamburger picanha ribeye, pork belly meatball chicken ham boudin sirloin corned beef frankfurter ham hock.",
+        "localImageResource": "card_image_music_06"
+      },
+      {
+        "type": "SIDE_INFO",
+        "title": "The Life Aquatic",
+        "description": "Seu Jorge",
+        "extraText": "Bacon ipsum dolor amet bresaola kevin tenderloin swine shoulder strip steak t-bone picanha turducken beef. Ribeye turkey t-bone pastrami meatball corned beef. Pork belly landjaeger short ribs ground round cupim, brisket ham tri-tip. Pig pork loin hamburger picanha ribeye, pork belly meatball chicken ham boudin sirloin corned beef frankfurter ham hock.",
+        "localImageResource": "card_image_music_07"
+      },
+      {
+        "type": "SIDE_INFO",
+        "title": "The Life Aquatic",
+        "description": "Seu Jorge",
+        "extraText": "Bacon ipsum dolor amet bresaola kevin tenderloin swine shoulder strip steak t-bone picanha turducken beef. Ribeye turkey t-bone pastrami meatball corned beef. Pork belly landjaeger short ribs ground round cupim, brisket ham tri-tip. Pig pork loin hamburger picanha ribeye, pork belly meatball chicken ham boudin sirloin corned beef frankfurter ham hock.",
+        "localImageResource": "card_image_music_08"
+      }
+    ]
+  },
+  {
+    "title": "BaseCardView using TextView",
+    "cards": [
+      {
+        "type": "TEXT",
+        "title": "연합뉴스",
+        "extraText": "한미 외교장관 유엔서 긴급회담…사드비용·한미FTA 논의한듯 \n\n 윤병세-틸러슨, 유엔 안보리 회의 앞서 따로 회동 (유엔본부=연합뉴스) 김화영 특파원 = 윤병세 외교부 장관과 렉스 틸러슨 미국 국무장관이 28일(현지시간) 오전 뉴욕 유엔본부에서 외교장관 회담을 가졌다. 양국 장관은 이날 북한 핵문제를 논의하기 위한 한미일 외교장관회담 직후 따로 회동했다. 예정에 없었던 일정으로 긴급하게 마련됐다. ",
+        "localImageResource": "face_01"
+      },
+      {
+        "type": "TEXT",
+        "title": "머니투데이",
+        "extraText": "대선주자 격돌 '세수대책 부족'vs'사드 10억弗 어쩌냐'(종합)\n\n 새 정부의 경제공약을 놓고 5인의 대선후보들이 격돌했다. '경제'에서도 보수와 진보가 치열하게 맞섰다. 보수 후보들은 진보정당 후보들의 복지공약에 대해 재정정책이 부족하다고 지적했다. 진보진영 후보들은 사드(고고도미사일방어체계) 도입에 대해 트럼프 미국 대통령의 10억달러 지급 요구에 대해 보수진영의 대응책 제시를 요구하며 압박했다.",
+        "localImageResource": "face_02"
+      },
+      {
+        "type": "TEXT",
+        "title": "Jonathan Max",
+        "extraText": "Bacon ipsum dolor amet bresaola kevin tenderloin swine shoulder strip steak t-bone picanha turducken beef. Ribeye turkey t-bone pastrami meatball corned beef. Pork belly landjaeger short ribs ground round cupim, brisket ham tri-tip. Pig pork loin hamburger picanha ribeye, pork belly meatball chicken ham boudin sirloin corned beef frankfurter ham hock.",
+        "localImageResource": "face_03"
+      },
+      {
+        "type": "TEXT",
+        "title": "Jonathan Max",
+        "extraText": "Bacon ipsum dolor amet bresaola kevin tenderloin swine shoulder strip steak t-bone picanha turducken beef. Ribeye turkey t-bone pastrami meatball corned beef. Pork belly landjaeger short ribs ground round cupim, brisket ham tri-tip. Pig pork loin hamburger picanha ribeye, pork belly meatball chicken ham boudin sirloin corned beef frankfurter ham hock.",
+        "localImageResource": "face_04"
+      },
+      {
+        "type": "TEXT",
+        "title": "Jonathan Max",
+        "extraText": "Bacon ipsum dolor amet bresaola kevin tenderloin swine shoulder strip steak t-bone picanha turducken beef. Ribeye turkey t-bone pastrami meatball corned beef. Pork belly landjaeger short ribs ground round cupim, brisket ham tri-tip. Pig pork loin hamburger picanha ribeye, pork belly meatball chicken ham boudin sirloin corned beef frankfurter ham hock.",
+        "localImageResource": "face_05"
+      },
+      {
+        "type": "TEXT",
+        "title": "Jonathan Max",
+        "extraText": "Bacon ipsum dolor amet bresaola kevin tenderloin swine shoulder strip steak t-bone picanha turducken beef. Ribeye turkey t-bone pastrami meatball corned beef. Pork belly landjaeger short ribs ground round cupim, brisket ham tri-tip. Pig pork loin hamburger picanha ribeye, pork belly meatball chicken ham boudin sirloin corned beef frankfurter ham hock.",
+        "localImageResource": "face_06"
+      },
+      {
+        "type": "TEXT",
+        "title": "Jonathan Max",
+        "extraText": "Bacon ipsum dolor amet bresaola kevin tenderloin swine shoulder strip steak t-bone picanha turducken beef. Ribeye turkey t-bone pastrami meatball corned beef. Pork belly landjaeger short ribs ground round cupim, brisket ham tri-tip. Pig pork loin hamburger picanha ribeye, pork belly meatball chicken ham boudin sirloin corned beef frankfurter ham hock.",
+        "localImageResource": "face_07"
+      },
+      {
+        "type": "TEXT",
+        "title": "Jonathan Max",
+        "extraText": "Bacon ipsum dolor amet bresaola kevin tenderloin swine shoulder strip steak t-bone picanha turducken beef. Ribeye turkey t-bone pastrami meatball corned beef. Pork belly landjaeger short ribs ground round cupim, brisket ham tri-tip. Pig pork loin hamburger picanha ribeye, pork belly meatball chicken ham boudin sirloin corned beef frankfurter ham hock.",
+        "localImageResource": "face_08"
+      }
+    ]
+  },
+  {
+    "title": "ImageCardView Customize Style",
+    "cards": [
+      {
+        "type": "SINGLE_LINE",
+        "title": "Action & Adventure",
+        "footerColor": "#dd004e",
+        "localImageResource": "category_action"
+      },
+      {
+        "type": "SINGLE_LINE",
+        "title": "Animation",
+        "footerColor": "#c51162",
+        "localImageResource": "category_animation"
+      },
+      {
+        "type": "SINGLE_LINE",
+        "title": "Classics",
+        "footerColor": "#9c27b0",
+        "localImageResource": "category_classics"
+      },
+      {
+        "type": "SINGLE_LINE",
+        "title": "Comedy",
+        "footerColor": "#cf4900",
+        "localImageResource": "category_comedy"
+      },
+      {
+        "type": "SINGLE_LINE",
+        "title": "Crime",
+        "footerColor": "#3f51b5",
+        "localImageResource": "category_crime"
+      },
+      {
+        "type": "SINGLE_LINE",
+        "title": "Documentary",
+        "footerColor": "#02639b",
+        "localImageResource": "category_documentary"
+      },
+      {
+        "type": "SINGLE_LINE",
+        "title": "Drama",
+        "footerColor": "#2a56c6",
+        "localImageResource": "category_drama"
+      }
+    ]
+  }
+]
